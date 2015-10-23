@@ -24,30 +24,32 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+//
 // Usage:
-
+//
 // $ pwd
 // /foo/bar/gl-matrix.d.ts/generator
-
+//
 // $ node -v
 // v4.2.1
-
+//
 // $ tsc -v
 // message TS6029: Version 1.7.0-dev.20151016
-
+//
 // $ git clone https://github.com/toji/gl-matrix.git
-
+//
 // $ ls -1F
 // generator.ts
 // gl-matrix/
 // node.d.ts
 // tsconfig.json
-
+//
 // $ tsc
-
+//
 // $ node generator.js > ../gl-matrix.d.ts
 // or
 // $ node generator.js --disable-javadoc > ../gl-matrix.d.ts
+//
 
 /// <reference path="node.d.ts" />
 "use strict";
