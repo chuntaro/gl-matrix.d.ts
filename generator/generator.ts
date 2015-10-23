@@ -322,11 +322,15 @@ let glMatrix = "";
       valueType = "() => number";
     }
     else if ((result = /.*\?\s*(\w+)\s*:\s*(\w+)/.exec(value)) !== null) {
-      if ((result[1] === ARRAY_TYPE && result[2] === "Array")
-          || (result[2] === ARRAY_TYPE && result[1] === "Array")) {
-        valueType = "Float32Array | Array<number>";
-      }
-      else {
+      if (result[1].indexOf("Array") >= 0 && result[2].indexOf("Array") >= 0) {
+        if (result[1] === "Array" && result[2].indexOf("Float") >= 0) {
+          ARRAY_TYPE = result[2];
+        }
+        else if (result[2] === "Array" && result[1].indexOf("Float") >= 0) {
+          ARRAY_TYPE = result[1];
+        }
+        valueType = `${ARRAY_TYPE} | Array<number>`;
+      } else {
         valueType = `${result[1]} | ${result[2]}`;
       }
     }
