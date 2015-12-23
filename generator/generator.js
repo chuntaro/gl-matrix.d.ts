@@ -53,7 +53,7 @@
 /// <reference path="node.d.ts" />
 "use strict";
 var fs = require("fs");
-let STRICTLY_TYPED = false; // Strict type checking version is still incomplete.
+let STRICTLY_TYPED = false;
 let ARRAY_TYPE = "Float32Array";
 let ENABLE_JAVADOC = true;
 let INTERFACE_DECL = "interface";
