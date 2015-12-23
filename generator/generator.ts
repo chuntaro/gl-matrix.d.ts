@@ -31,10 +31,10 @@
 // /foo/bar/gl-matrix.d.ts/generator
 //
 // $ node -v
-// v4.2.1
+// v4.2.3
 //
 // $ tsc -v
-// message TS6029: Version 1.7.0-dev.20151016
+// message TS6029: Version 1.7.5
 //
 // $ git clone https://github.com/toji/gl-matrix.git
 //
@@ -53,6 +53,7 @@
 // Options:
 // --strictly-typed
 // --disable-javadoc
+// --for-import
 //
 
 /// <reference path="node.d.ts" />
@@ -62,6 +63,8 @@ import * as fs from "fs";
 let STRICTLY_TYPED = false; // Strict type checking version is still incomplete.
 let ARRAY_TYPE = "Float32Array";
 let ENABLE_JAVADOC = true;
+let INTERFACE_DECL = "interface";
+let VAR_DECL = "declare var";
 
 process.argv.forEach(arg => {
   if (arg === "--strictly-typed") {
@@ -69,6 +72,10 @@ process.argv.forEach(arg => {
   }
   if (arg === "--disable-javadoc") {
     ENABLE_JAVADOC = false;
+  }
+  if (arg === "--for-import") {
+    INTERFACE_DECL = "export interface";
+    VAR_DECL = "export declare var";
   }
 });
 
@@ -333,7 +340,7 @@ let glMatrix = "";
 {
   const common_js = fs.readFileSync(glMatrixDir + "common.js", "utf-8");
 
-  glMatrix += "interface glMatrix {\n";
+  glMatrix += `${INTERFACE_DECL} glMatrix {\n`;
 
   let result: RegExpExecArray;
   while ((result = regex_glMatrix.exec(common_js)) !== null) {
@@ -372,7 +379,7 @@ let glMatrix = "";
     glMatrix += ToString(signature);
   });
 
-  glMatrix += `}\ndeclare var ${klass}: ${klass};\n`;
+  glMatrix += `}\n${VAR_DECL} ${klass}: ${klass};\n`;
 }
 
 //
@@ -422,9 +429,9 @@ for (const klass of signatureDB.keys()) {
   const methodMap = signatureDB.get(klass);
 
   if (STRICTLY_TYPED) {
-    output += `\n\ninterface ${klass} extends ${ARRAY_TYPE} {`;
+    output += `\n\n${INTERFACE_DECL} ${klass} extends ${ARRAY_TYPE} {`;
   } else {
-    output += `\n\ninterface ${klass} {`;
+    output += `\n\n${INTERFACE_DECL} ${klass} {`;
   }
   if (!ENABLE_JAVADOC) {
     output += "\n";
@@ -437,7 +444,7 @@ for (const klass of signatureDB.keys()) {
     output += ToString(signature);
   }
 
-  output += `}\ndeclare var ${klass}: ${klass};\n`;
+  output += `}\n${VAR_DECL} ${klass}: ${klass};\n`;
 }
 
 console.log(`${header}\n\n${glMatrix}${output}`);
