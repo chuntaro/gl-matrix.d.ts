@@ -50,6 +50,10 @@
 // or
 // $ node generator.js --disable-javadoc > ../gl-matrix.d.ts
 //
+// Options:
+// --strictly-typed
+// --disable-javadoc
+//
 
 /// <reference path="node.d.ts" />
 "use strict";
@@ -158,6 +162,17 @@ function ToString(signature: Signature): string {
 
   const method = signature.method;
 
+  let incompatible = false;
+  if (STRICTLY_TYPED) {
+    switch (method) {
+    case "set":
+    case "length":
+    case "forEach":
+      incompatible = true;
+      break;
+    }
+  }
+
   const isAlias = signature.isAlias;
   if (isAlias) {
     const targetKlass = signature.targetKlass;
@@ -196,11 +211,19 @@ function ToString(signature: Signature): string {
     str += `\n${javadoc2}\n`;
   }
 
-  str += `  ${method}`;
+  if (incompatible) {
+    str += `  // ${method}`;
+  } else {
+    str += `  ${method}`;
+  }
   if (isGeneric) {
     str += "<T>";
   }
-  str += "(" + strParams + `): ${returnType};\n`;
+  str += "(" + strParams + `): ${returnType};`;
+  if (incompatible) {
+    str += " // incompatible Float32Array";
+  }
+  str += "\n";
 
   return str;
 }
@@ -398,7 +421,11 @@ let output = "";
 for (const klass of signatureDB.keys()) {
   const methodMap = signatureDB.get(klass);
 
-  output += `\n\ninterface ${klass} {`;
+  if (STRICTLY_TYPED) {
+    output += `\n\ninterface ${klass} extends ${ARRAY_TYPE} {`;
+  } else {
+    output += `\n\ninterface ${klass} {`;
+  }
   if (!ENABLE_JAVADOC) {
     output += "\n";
   }
