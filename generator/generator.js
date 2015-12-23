@@ -26,10 +26,10 @@
 // /foo/bar/gl-matrix.d.ts/generator
 //
 // $ node -v
-// v4.2.1
+// v4.2.3
 //
 // $ tsc -v
-// message TS6029: Version 1.7.0-dev.20151016
+// message TS6029: Version 1.7.5
 //
 // $ git clone https://github.com/toji/gl-matrix.git
 //
@@ -186,7 +186,7 @@ function ToString(signature) {
     }
     str += "(" + strParams + `): ${returnType};`;
     if (incompatible) {
-        str += " // incompatible Float32Array";
+        str += " // not Float32Array compatible";
     }
     str += "\n";
     return str;

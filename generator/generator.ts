@@ -228,7 +228,7 @@ function ToString(signature: Signature): string {
   }
   str += "(" + strParams + `): ${returnType};`;
   if (incompatible) {
-    str += " // incompatible Float32Array";
+    str += " // not Float32Array compatible";
   }
   str += "\n";
 
