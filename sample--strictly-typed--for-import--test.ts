@@ -36,4 +36,4 @@ function uniform3fv(v: Float32Array): void {
   console.log(v);
 }
 
-uniform3fv(m3); // ok!
+uniform3fv(v3); // ok!
