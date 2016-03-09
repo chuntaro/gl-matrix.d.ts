@@ -25,6 +25,17 @@ export interface glMatrix {
   * @param {Number} Angle in Degrees
   */
   toRadian(a: number): number;
+
+  /**
+   * Tests whether or not the arguments have approximately the same value, within an absolute
+   * or relative tolerance of glMatrix.EPSILON (an absolute tolerance is used for values less 
+   * than or equal to 1.0, and a relative tolerance is used for larger values)
+   * 
+   * @param {Number} a The first number to test.
+   * @param {Number} b The second number to test.
+   * @returns {Boolean} True if the numbers are approximately equal, false otherwise.
+   */
+  equals(a: number, b: number): boolean;
 }
 export declare var glMatrix: glMatrix;
 
@@ -144,6 +155,24 @@ export interface vec2 extends Float32Array {
   div(out: vec2, a: vec2, b: vec2): vec2;
 
   /**
+   * Math.ceil the components of a vec2
+   *
+   * @param {vec2} out the receiving vector
+   * @param {vec2} a vector to ceil
+   * @returns {vec2} out
+   */
+  ceil(out: vec2, a: vec2): vec2;
+
+  /**
+   * Math.floor the components of a vec2
+   *
+   * @param {vec2} out the receiving vector
+   * @param {vec2} a vector to floor
+   * @returns {vec2} out
+   */
+  floor(out: vec2, a: vec2): vec2;
+
+  /**
    * Returns the minimum of two vec2's
    *
    * @param {vec2} out the receiving vector
@@ -162,6 +191,15 @@ export interface vec2 extends Float32Array {
    * @returns {vec2} out
    */
   max(out: vec2, a: vec2, b: vec2): vec2;
+
+  /**
+   * Math.round the components of a vec2
+   *
+   * @param {vec2} out the receiving vector
+   * @param {vec2} a vector to round
+   * @returns {vec2} out
+   */
+  round(out: vec2, a: vec2): vec2;
 
   /**
    * Scales a vec2 by a scalar number
@@ -383,6 +421,24 @@ export interface vec2 extends Float32Array {
    * @returns {String} string representation of the vector
    */
   str(a: vec2): string;
+
+  /**
+   * Returns whether or not the vectors exactly have the same elements in the same position (when compared with ===)
+   *
+   * @param {vec2} a The first vector.
+   * @param {vec2} b The second vector.
+   * @returns {Boolean} True if the vectors are equal, false otherwise.
+   */
+  exactEquals(a: vec2, b: vec2): boolean;
+
+  /**
+   * Returns whether or not the vectors have approximately the same elements in the same position.
+   *
+   * @param {vec2} a The first vector.
+   * @param {vec2} b The second vector.
+   * @returns {Boolean} True if the vectors are equal, false otherwise.
+   */
+  equals(a: vec2, b: vec2): boolean;
 }
 export declare var vec2: vec2;
 
@@ -504,6 +560,24 @@ export interface vec3 extends Float32Array {
   div(out: vec3, a: vec3, b: vec3): vec3;
 
   /**
+   * Math.ceil the components of a vec3
+   *
+   * @param {vec3} out the receiving vector
+   * @param {vec3} a vector to ceil
+   * @returns {vec3} out
+   */
+  ceil(out: vec3, a: vec3): vec3;
+
+  /**
+   * Math.floor the components of a vec3
+   *
+   * @param {vec3} out the receiving vector
+   * @param {vec3} a vector to floor
+   * @returns {vec3} out
+   */
+  floor(out: vec3, a: vec3): vec3;
+
+  /**
    * Returns the minimum of two vec3's
    *
    * @param {vec3} out the receiving vector
@@ -522,6 +596,15 @@ export interface vec3 extends Float32Array {
    * @returns {vec3} out
    */
   max(out: vec3, a: vec3, b: vec3): vec3;
+
+  /**
+   * Math.round the components of a vec3
+   *
+   * @param {vec3} out the receiving vector
+   * @param {vec3} a vector to round
+   * @returns {vec3} out
+   */
+  round(out: vec3, a: vec3): vec3;
 
   /**
    * Scales a vec3 by a scalar number
@@ -794,6 +877,24 @@ export interface vec3 extends Float32Array {
    * @returns {String} string representation of the vector
    */
   str(a: vec3): string;
+
+  /**
+   * Returns whether or not the vectors have exactly the same elements in the same position (when compared with ===)
+   *
+   * @param {vec3} a The first vector.
+   * @param {vec3} b The second vector.
+   * @returns {Boolean} True if the vectors are equal, false otherwise.
+   */
+  exactEquals(a: vec3, b: vec3): boolean;
+
+  /**
+   * Returns whether or not the vectors have approximately the same elements in the same position.
+   *
+   * @param {vec3} a The first vector.
+   * @param {vec3} b The second vector.
+   * @returns {Boolean} True if the vectors are equal, false otherwise.
+   */
+  equals(a: vec3, b: vec3): boolean;
 }
 export declare var vec3: vec3;
 
@@ -917,6 +1018,24 @@ export interface vec4 extends Float32Array {
   div(out: vec4, a: vec4, b: vec4): vec4;
 
   /**
+   * Math.ceil the components of a vec4
+   *
+   * @param {vec4} out the receiving vector
+   * @param {vec4} a vector to ceil
+   * @returns {vec4} out
+   */
+  ceil(out: vec4, a: vec4): vec4;
+
+  /**
+   * Math.floor the components of a vec4
+   *
+   * @param {vec4} out the receiving vector
+   * @param {vec4} a vector to floor
+   * @returns {vec4} out
+   */
+  floor(out: vec4, a: vec4): vec4;
+
+  /**
    * Returns the minimum of two vec4's
    *
    * @param {vec4} out the receiving vector
@@ -935,6 +1054,15 @@ export interface vec4 extends Float32Array {
    * @returns {vec4} out
    */
   max(out: vec4, a: vec4, b: vec4): vec4;
+
+  /**
+   * Math.round the components of a vec4
+   *
+   * @param {vec4} out the receiving vector
+   * @param {vec4} a vector to round
+   * @returns {vec4} out
+   */
+  round(out: vec4, a: vec4): vec4;
 
   /**
    * Scales a vec4 by a scalar number
@@ -1122,6 +1250,24 @@ export interface vec4 extends Float32Array {
    * @returns {String} string representation of the vector
    */
   str(a: vec4): string;
+
+  /**
+   * Returns whether or not the vectors have exactly the same elements in the same position (when compared with ===)
+   *
+   * @param {vec4} a The first vector.
+   * @param {vec4} b The second vector.
+   * @returns {Boolean} True if the vectors are equal, false otherwise.
+   */
+  exactEquals(a: vec4, b: vec4): boolean;
+
+  /**
+   * Returns whether or not the vectors have approximately the same elements in the same position.
+   *
+   * @param {vec4} a The first vector.
+   * @param {vec4} b The second vector.
+   * @returns {Boolean} True if the vectors are equal, false otherwise.
+   */
+  equals(a: vec4, b: vec4): boolean;
 }
 export declare var vec4: vec4;
 
@@ -1158,6 +1304,29 @@ export interface mat2 extends Float32Array {
    * @returns {mat2} out
    */
   identity(out: mat2): mat2;
+
+  /**
+   * Create a new mat2 with the given values
+   *
+   * @param {Number} m00 Component in column 0, row 0 position (index 0)
+   * @param {Number} m01 Component in column 0, row 1 position (index 1)
+   * @param {Number} m10 Component in column 1, row 0 position (index 2)
+   * @param {Number} m11 Component in column 1, row 1 position (index 3)
+   * @returns {mat2} out A new 2x2 matrix
+   */
+  fromValues(m00: number, m01: number, m10: number, m11: number): mat2;
+
+  /**
+   * Set the components of a mat2 to the given values
+   *
+   * @param {mat2} out the receiving matrix
+   * @param {Number} m00 Component in column 0, row 0 position (index 0)
+   * @param {Number} m01 Component in column 0, row 1 position (index 1)
+   * @param {Number} m10 Component in column 1, row 0 position (index 2)
+   * @param {Number} m11 Component in column 1, row 1 position (index 3)
+   * @returns {mat2} out
+   */
+  // set(out: mat2, m00: number, m01: number, m10: number, m11: number): mat2; // not Float32Array compatible
 
   /**
    * Transpose the values of a mat2
@@ -1284,6 +1453,75 @@ export interface mat2 extends Float32Array {
    * @param {mat2} a the input matrix to factorize
    */
   LDU(L: mat2, D: mat2, U: mat2, a: mat2): mat2[];
+
+  /**
+   * Adds two mat2's
+   *
+   * @param {mat2} out the receiving matrix
+   * @param {mat2} a the first operand
+   * @param {mat2} b the second operand
+   * @returns {mat2} out
+   */
+  add(out: mat2, a: mat2, b: mat2): mat2;
+
+  /**
+   * Subtracts matrix b from matrix a
+   *
+   * @param {mat2} out the receiving matrix
+   * @param {mat2} a the first operand
+   * @param {mat2} b the second operand
+   * @returns {mat2} out
+   */
+  subtract(out: mat2, a: mat2, b: mat2): mat2;
+
+  /**
+   * Subtracts matrix b from matrix a
+   *
+   * @param {mat2} out the receiving matrix
+   * @param {mat2} a the first operand
+   * @param {mat2} b the second operand
+   * @returns {mat2} out
+   */
+  sub(out: mat2, a: mat2, b: mat2): mat2;
+
+  /**
+   * Returns whether or not the matrices have exactly the same elements in the same position (when compared with ===)
+   *
+   * @param {mat2} a The first matrix.
+   * @param {mat2} b The second matrix.
+   * @returns {Boolean} True if the matrices are equal, false otherwise.
+   */
+  exactEquals(a: mat2, b: mat2): boolean;
+
+  /**
+   * Returns whether or not the matrices have approximately the same elements in the same position.
+   *
+   * @param {mat2} a The first matrix.
+   * @param {mat2} b The second matrix.
+   * @returns {Boolean} True if the matrices are equal, false otherwise.
+   */
+  equals(a: mat2, b: mat2): boolean;
+
+  /**
+   * Multiply each element of the matrix by a scalar.
+   *
+   * @param {mat2} out the receiving matrix
+   * @param {mat2} a the matrix to scale
+   * @param {Number} b amount to scale the matrix's elements by
+   * @returns {mat2} out
+   */
+  multiplyScalar(out: mat2, a: mat2, b: number): mat2;
+
+  /**
+   * Adds two mat2's after multiplying each element of the second operand by a scalar value.
+   *
+   * @param {mat2} out the receiving vector
+   * @param {mat2} a the first operand
+   * @param {mat2} b the second operand
+   * @param {Number} scale the amount to scale b's elements by before adding
+   * @returns {mat2} out
+   */
+  multiplyScalarAndAdd(out: mat2, a: mat2, b: mat2, scale: number): mat2;
 }
 export declare var mat2: mat2;
 
@@ -1320,6 +1558,33 @@ export interface mat2d extends Float32Array {
    * @returns {mat2d} out
    */
   identity(out: mat2d): mat2d;
+
+  /**
+   * Create a new mat2d with the given values
+   *
+   * @param {Number} a Component A (index 0)
+   * @param {Number} b Component B (index 1)
+   * @param {Number} c Component C (index 2)
+   * @param {Number} d Component D (index 3)
+   * @param {Number} tx Component TX (index 4)
+   * @param {Number} ty Component TY (index 5)
+   * @returns {mat2d} A new mat2d
+   */
+  fromValues(a: number, b: number, c: number, d: number, tx: number, ty: number): mat2d;
+
+  /**
+   * Set the components of a mat2d to the given values
+   *
+   * @param {mat2d} out the receiving matrix
+   * @param {Number} a Component A (index 0)
+   * @param {Number} b Component B (index 1)
+   * @param {Number} c Component C (index 2)
+   * @param {Number} d Component D (index 3)
+   * @param {Number} tx Component TX (index 4)
+   * @param {Number} ty Component TY (index 5)
+   * @returns {mat2d} out
+   */
+  // set(out: mat2d, a: number, b: number, c: number, d: number, tx: number, ty: number): mat2d; // not Float32Array compatible
 
   /**
    * Inverts a mat2d
@@ -1442,6 +1707,75 @@ export interface mat2d extends Float32Array {
    * @returns {Number} Frobenius norm
    */
   frob(a: mat2d): number;
+
+  /**
+   * Adds two mat2d's
+   *
+   * @param {mat2d} out the receiving matrix
+   * @param {mat2d} a the first operand
+   * @param {mat2d} b the second operand
+   * @returns {mat2d} out
+   */
+  add(out: mat2d, a: mat2d, b: mat2d): mat2d;
+
+  /**
+   * Subtracts matrix b from matrix a
+   *
+   * @param {mat2d} out the receiving matrix
+   * @param {mat2d} a the first operand
+   * @param {mat2d} b the second operand
+   * @returns {mat2d} out
+   */
+  subtract(out: mat2d, a: mat2d, b: mat2d): mat2d;
+
+  /**
+   * Subtracts matrix b from matrix a
+   *
+   * @param {mat2d} out the receiving matrix
+   * @param {mat2d} a the first operand
+   * @param {mat2d} b the second operand
+   * @returns {mat2d} out
+   */
+  sub(out: mat2d, a: mat2d, b: mat2d): mat2d;
+
+  /**
+   * Multiply each element of the matrix by a scalar.
+   *
+   * @param {mat2d} out the receiving matrix
+   * @param {mat2d} a the matrix to scale
+   * @param {Number} b amount to scale the matrix's elements by
+   * @returns {mat2d} out
+   */
+  multiplyScalar(out: mat2d, a: mat2d, b: number): mat2d;
+
+  /**
+   * Adds two mat2d's after multiplying each element of the second operand by a scalar value.
+   *
+   * @param {mat2d} out the receiving vector
+   * @param {mat2d} a the first operand
+   * @param {mat2d} b the second operand
+   * @param {Number} scale the amount to scale b's elements by before adding
+   * @returns {mat2d} out
+   */
+  multiplyScalarAndAdd(out: mat2d, a: mat2d, b: mat2d, scale: number): mat2d;
+
+  /**
+   * Returns whether or not the matrices have exactly the same elements in the same position (when compared with ===)
+   *
+   * @param {mat2d} a The first matrix.
+   * @param {mat2d} b The second matrix.
+   * @returns {Boolean} True if the matrices are equal, false otherwise.
+   */
+  exactEquals(a: mat2d, b: mat2d): boolean;
+
+  /**
+   * Returns whether or not the matrices have approximately the same elements in the same position.
+   *
+   * @param {mat2d} a The first matrix.
+   * @param {mat2d} b The second matrix.
+   * @returns {Boolean} True if the matrices are equal, false otherwise.
+   */
+  equals(a: mat2d, b: mat2d): boolean;
 }
 export declare var mat2d: mat2d;
 
@@ -1479,6 +1813,39 @@ export interface mat3 extends Float32Array {
    * @returns {mat3} out
    */
   copy(out: mat3, a: mat3): mat3;
+
+  /**
+   * Create a new mat3 with the given values
+   *
+   * @param {Number} m00 Component in column 0, row 0 position (index 0)
+   * @param {Number} m01 Component in column 0, row 1 position (index 1)
+   * @param {Number} m02 Component in column 0, row 2 position (index 2)
+   * @param {Number} m10 Component in column 1, row 0 position (index 3)
+   * @param {Number} m11 Component in column 1, row 1 position (index 4)
+   * @param {Number} m12 Component in column 1, row 2 position (index 5)
+   * @param {Number} m20 Component in column 2, row 0 position (index 6)
+   * @param {Number} m21 Component in column 2, row 1 position (index 7)
+   * @param {Number} m22 Component in column 2, row 2 position (index 8)
+   * @returns {mat3} A new mat3
+   */
+  fromValues(m00: number, m01: number, m02: number, m10: number, m11: number, m12: number, m20: number, m21: number, m22: number): mat3;
+
+  /**
+   * Set the components of a mat3 to the given values
+   *
+   * @param {mat3} out the receiving matrix
+   * @param {Number} m00 Component in column 0, row 0 position (index 0)
+   * @param {Number} m01 Component in column 0, row 1 position (index 1)
+   * @param {Number} m02 Component in column 0, row 2 position (index 2)
+   * @param {Number} m10 Component in column 1, row 0 position (index 3)
+   * @param {Number} m11 Component in column 1, row 1 position (index 4)
+   * @param {Number} m12 Component in column 1, row 2 position (index 5)
+   * @param {Number} m20 Component in column 2, row 0 position (index 6)
+   * @param {Number} m21 Component in column 2, row 1 position (index 7)
+   * @param {Number} m22 Component in column 2, row 2 position (index 8)
+   * @returns {mat3} out
+   */
+  // set(out: mat3, m00: number, m01: number, m02: number, m10: number, m11: number, m12: number, m20: number, m21: number, m22: number): mat3; // not Float32Array compatible
 
   /**
    * Set a mat3 to the identity matrix
@@ -1656,6 +2023,66 @@ export interface mat3 extends Float32Array {
    * @returns {Number} Frobenius norm
    */
   frob(a: mat3): number;
+
+  /**
+   * Adds two mat3's
+   *
+   * @param {mat3} out the receiving matrix
+   * @param {mat3} a the first operand
+   * @param {mat3} b the second operand
+   * @returns {mat3} out
+   */
+  add(out: mat3, a: mat3, b: mat3): mat3;
+
+  /**
+   * Subtracts matrix b from matrix a
+   *
+   * @param {mat3} out the receiving matrix
+   * @param {mat3} a the first operand
+   * @param {mat3} b the second operand
+   * @returns {mat3} out
+   */
+  subtract(out: mat3, a: mat3, b: mat3): mat3;
+
+  /**
+   * Subtracts matrix b from matrix a
+   *
+   * @param {mat3} out the receiving matrix
+   * @param {mat3} a the first operand
+   * @param {mat3} b the second operand
+   * @returns {mat3} out
+   */
+  sub(out: mat3, a: mat3, b: mat3): mat3;
+
+  /**
+   * Multiply each element of the matrix by a scalar.
+   *
+   * @param {mat3} out the receiving matrix
+   * @param {mat3} a the matrix to scale
+   * @param {Number} b amount to scale the matrix's elements by
+   * @returns {mat3} out
+   */
+  multiplyScalar(out: mat3, a: mat3, b: number): mat3;
+
+  /**
+   * Adds two mat3's after multiplying each element of the second operand by a scalar value.
+   *
+   * @param {mat3} out the receiving vector
+   * @param {mat3} a the first operand
+   * @param {mat3} b the second operand
+   * @param {Number} scale the amount to scale b's elements by before adding
+   * @returns {mat3} out
+   */
+  multiplyScalarAndAdd(out: mat3, a: mat3, b: mat3, scale: number): mat3;
+
+  /**
+   * Returns whether or not the matrices have approximately the same elements in the same position.
+   *
+   * @param {mat3} a The first matrix.
+   * @param {mat3} b The second matrix.
+   * @returns {Boolean} True if the matrices are equal, false otherwise.
+   */
+  equals(a: mat3, b: mat3): boolean;
 }
 export declare var mat3: mat3;
 
@@ -1684,6 +2111,53 @@ export interface mat4 extends Float32Array {
    * @returns {mat4} out
    */
   copy(out: mat4, a: mat4): mat4;
+
+  /**
+   * Create a new mat4 with the given values
+   *
+   * @param {Number} m00 Component in column 0, row 0 position (index 0)
+   * @param {Number} m01 Component in column 0, row 1 position (index 1)
+   * @param {Number} m02 Component in column 0, row 2 position (index 2)
+   * @param {Number} m03 Component in column 0, row 3 position (index 3)
+   * @param {Number} m10 Component in column 1, row 0 position (index 4)
+   * @param {Number} m11 Component in column 1, row 1 position (index 5)
+   * @param {Number} m12 Component in column 1, row 2 position (index 6)
+   * @param {Number} m13 Component in column 1, row 3 position (index 7)
+   * @param {Number} m20 Component in column 2, row 0 position (index 8)
+   * @param {Number} m21 Component in column 2, row 1 position (index 9)
+   * @param {Number} m22 Component in column 2, row 2 position (index 10)
+   * @param {Number} m23 Component in column 2, row 3 position (index 11)
+   * @param {Number} m30 Component in column 3, row 0 position (index 12)
+   * @param {Number} m31 Component in column 3, row 1 position (index 13)
+   * @param {Number} m32 Component in column 3, row 2 position (index 14)
+   * @param {Number} m33 Component in column 3, row 3 position (index 15)
+   * @returns {mat4} A new mat4
+   */
+  fromValues(m00: number, m01: number, m02: number, m03: number, m10: number, m11: number, m12: number, m13: number, m20: number, m21: number, m22: number, m23: number, m30: number, m31: number, m32: number, m33: number): mat4;
+
+  /**
+   * Set the components of a mat4 to the given values
+   *
+   * @param {mat4} out the receiving matrix
+   * @param {Number} m00 Component in column 0, row 0 position (index 0)
+   * @param {Number} m01 Component in column 0, row 1 position (index 1)
+   * @param {Number} m02 Component in column 0, row 2 position (index 2)
+   * @param {Number} m03 Component in column 0, row 3 position (index 3)
+   * @param {Number} m10 Component in column 1, row 0 position (index 4)
+   * @param {Number} m11 Component in column 1, row 1 position (index 5)
+   * @param {Number} m12 Component in column 1, row 2 position (index 6)
+   * @param {Number} m13 Component in column 1, row 3 position (index 7)
+   * @param {Number} m20 Component in column 2, row 0 position (index 8)
+   * @param {Number} m21 Component in column 2, row 1 position (index 9)
+   * @param {Number} m22 Component in column 2, row 2 position (index 10)
+   * @param {Number} m23 Component in column 2, row 3 position (index 11)
+   * @param {Number} m30 Component in column 3, row 0 position (index 12)
+   * @param {Number} m31 Component in column 3, row 1 position (index 13)
+   * @param {Number} m32 Component in column 3, row 2 position (index 14)
+   * @param {Number} m33 Component in column 3, row 3 position (index 15)
+   * @returns {mat4} out
+   */
+  // set(out: mat4, m00: number, m01: number, m02: number, m03: number, m10: number, m11: number, m12: number, m13: number, m20: number, m21: number, m22: number, m23: number, m30: number, m31: number, m32: number, m33: number): mat4; // not Float32Array compatible
 
   /**
    * Set a mat4 to the identity matrix
@@ -1906,6 +2380,28 @@ export interface mat4 extends Float32Array {
   fromRotationTranslation(out: mat4, q: quat, v: vec3): mat4;
 
   /**
+   * Returns the translation vector component of a transformation
+   *  matrix. If a matrix is built with fromRotationTranslation,
+   *  the returned vector will be the same as the translation vector
+   *  originally supplied.
+   * @param  {vec3} out Vector to receive translation component
+   * @param  {mat4} mat Matrix to be decomposed (input)
+   * @return {vec3} out
+   */
+  getTranslation(out: vec3, mat: mat4): vec3;
+
+  /**
+   * Returns a quaternion representing the rotational component
+   *  of a transformation matrix. If a matrix is built with
+   *  fromRotationTranslation, the returned quaternion will be the
+   *  same as the quaternion originally supplied.
+   * @param {quat} out Quaternion to receive the rotation component
+   * @param {mat4} mat Matrix to be decomposed (input)
+   * @return {quat} out
+   */
+  getRotation(out: quat, mat: mat4): quat;
+
+  /**
    * Creates a matrix from a quaternion rotation, vector translation and vector scale
    * This is equivalent to (but much faster than):
    *
@@ -1988,12 +2484,12 @@ export interface mat4 extends Float32Array {
    * with the still experiemental WebVR API.
    *
    * @param {mat4} out mat4 frustum matrix will be written into
-   * @param {number} fov Object containing the following values: upDegrees, downDegrees, leftDegrees, rightDegrees
+   * @param {Object} fov Object containing the following values: upDegrees, downDegrees, leftDegrees, rightDegrees
    * @param {number} near Near bound of the frustum
    * @param {number} far Far bound of the frustum
    * @returns {mat4} out
    */
-  perspectiveFromFieldOfView(out: mat4, fov: number, near: number, far: number): mat4;
+  perspectiveFromFieldOfView(out: mat4, fov: {upDegrees: number, downDegrees: number, leftDegrees: number, rightDegrees: number}, near: number, far: number): mat4;
 
   /**
    * Generates a orthogonal projection matrix with the given bounds
@@ -2035,6 +2531,75 @@ export interface mat4 extends Float32Array {
    * @returns {Number} Frobenius norm
    */
   frob(a: mat4): number;
+
+  /**
+   * Adds two mat4's
+   *
+   * @param {mat4} out the receiving matrix
+   * @param {mat4} a the first operand
+   * @param {mat4} b the second operand
+   * @returns {mat4} out
+   */
+  add(out: mat4, a: mat4, b: mat4): mat4;
+
+  /**
+   * Subtracts matrix b from matrix a
+   *
+   * @param {mat4} out the receiving matrix
+   * @param {mat4} a the first operand
+   * @param {mat4} b the second operand
+   * @returns {mat4} out
+   */
+  subtract(out: mat4, a: mat4, b: mat4): mat4;
+
+  /**
+   * Subtracts matrix b from matrix a
+   *
+   * @param {mat4} out the receiving matrix
+   * @param {mat4} a the first operand
+   * @param {mat4} b the second operand
+   * @returns {mat4} out
+   */
+  sub(out: mat4, a: mat4, b: mat4): mat4;
+
+  /**
+   * Multiply each element of the matrix by a scalar.
+   *
+   * @param {mat4} out the receiving matrix
+   * @param {mat4} a the matrix to scale
+   * @param {Number} b amount to scale the matrix's elements by
+   * @returns {mat4} out
+   */
+  multiplyScalar(out: mat4, a: mat4, b: number): mat4;
+
+  /**
+   * Adds two mat4's after multiplying each element of the second operand by a scalar value.
+   *
+   * @param {mat4} out the receiving vector
+   * @param {mat4} a the first operand
+   * @param {mat4} b the second operand
+   * @param {Number} scale the amount to scale b's elements by before adding
+   * @returns {mat4} out
+   */
+  multiplyScalarAndAdd(out: mat4, a: mat4, b: mat4, scale: number): mat4;
+
+  /**
+   * Returns whether or not the matrices have exactly the same elements in the same position (when compared with ===)
+   *
+   * @param {mat4} a The first matrix.
+   * @param {mat4} b The second matrix.
+   * @returns {Boolean} True if the matrices are equal, false otherwise.
+   */
+  exactEquals(a: mat4, b: mat4): boolean;
+
+  /**
+   * Returns whether or not the matrices have approximately the same elements in the same position.
+   *
+   * @param {mat4} a The first matrix.
+   * @param {mat4} b The second matrix.
+   * @returns {Boolean} True if the matrices are equal, false otherwise.
+   */
+  equals(a: mat4, b: mat4): boolean;
 }
 export declare var mat4: mat4;
 
@@ -2130,6 +2695,21 @@ export interface quat extends Float32Array {
    * @returns {quat} out
    **/
   setAxisAngle(out: quat, axis: vec3, rad: number): quat;
+
+  /**
+   * Gets the rotation axis and angle for a given
+   *  quaternion. If a quaternion is created with
+   *  setAxisAngle, this method will return the same
+   *  values as providied in the original parameter list
+   *  OR functionally equivalent values.
+   * Example: The quaternion formed by axis [0, 0, 1] and
+   *  angle -90 is the same as the quaternion formed by
+   *  [0, 0, 1] and 270. This method favors the latter.
+   * @param  {vec3} out_axis  Vector receiving the axis of rotation
+   * @param  {quat} q     Quaternion to be decomposed
+   * @return {Number}     Angle, in radians, of the rotation
+   */
+  getAxisAngle(out_axis: vec3, q: quat): number;
 
   /**
    * Adds two vec4's
@@ -2338,6 +2918,24 @@ export interface quat extends Float32Array {
    * @returns {String} string representation of the vector
    */
   str(a: quat): string;
+
+  /**
+   * Returns whether or not the vectors have exactly the same elements in the same position (when compared with ===)
+   *
+   * @param {vec4} a The first vector.
+   * @param {vec4} b The second vector.
+   * @returns {Boolean} True if the vectors are equal, false otherwise.
+   */
+  exactEquals(a: vec4, b: vec4): boolean;
+
+  /**
+   * Returns whether or not the vectors have approximately the same elements in the same position.
+   *
+   * @param {vec4} a The first vector.
+   * @param {vec4} b The second vector.
+   * @returns {Boolean} True if the vectors are equal, false otherwise.
+   */
+  equals(a: vec4, b: vec4): boolean;
 }
 export declare var quat: quat;
 
