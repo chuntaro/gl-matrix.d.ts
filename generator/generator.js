@@ -1,9 +1,9 @@
 /**
  * @fileoverview gl-matrix.d.ts generator
  * @author chuntaro <chuntaro@sakura-games.jp>
- * @version 1.0.0
+ * @version 1.1.0
  */
-// Copyright (c) 2015 chuntaro
+// Copyright (c) 2015, 2016  chuntaro
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
@@ -26,10 +26,10 @@
 // /foo/bar/gl-matrix.d.ts/generator
 //
 // $ node -v
-// v4.2.3
+// v4.3.2
 //
 // $ tsc -v
-// message TS6029: Version 1.7.5
+// Version 1.8.2
 //
 // $ git clone https://github.com/toji/gl-matrix.git
 //
@@ -52,7 +52,7 @@
 //
 /// <reference path="node.d.ts" />
 "use strict";
-var fs = require("fs");
+const fs = require("fs");
 let STRICTLY_TYPED = false;
 let ARRAY_TYPE = "Float32Array";
 let ENABLE_JAVADOC = true;
@@ -88,7 +88,7 @@ function debug(obj, message) {
 }
 const glMatrixDir = "gl-matrix/src/gl-matrix/";
 const klasses = ["vec2", "vec3", "vec4", "mat2", "mat2d", "mat3", "mat4", "quat"];
-const javadocTypes = ["number", "Number", "String", "quat4", "Function", "Object", "Array", "Type"];
+const javadocTypes = ["number", "Number", "String", "quat4", "Function", "Object", "Array", "Type", "Boolean"];
 const validTypes = klasses.concat(javadocTypes);
 function convertType(fromType, klass, method) {
     let toType = "void";
@@ -116,6 +116,9 @@ function convertType(fromType, klass, method) {
                 toType = fromType.toLowerCase();
                 break;
         }
+    }
+    else if (fromType[0] === "{" && fromType[fromType.length - 1] === "}") {
+        toType = fromType;
     }
     if (!STRICTLY_TYPED && klasses.indexOf(toType) >= 0) {
         toType = ARRAY_TYPE;
@@ -201,8 +204,8 @@ const reParams = String.raw `(?:\((.*)\))?`;
 const reFirst = String.raw `(/\*\*${reDocTerm}\*/)${reDocTerm}`;
 const reLast = String.raw `${reMethod}\s*=\s*${reFunc}\s*${reParams}\s*(?:\{[\s\S]*?(?:(return)|\}))?`;
 const regexMethod = new RegExp(reFirst + "(?:" + reKlasses + ")" + reLast, "g");
-const regexParams = /@(?:param|returns)\s*{(\w+)}\s*/g;
-const regexReturns = /@returns\s*{(\w+)}/;
+const regexParams = /@(?:param|returns)\s*{(\w+)}\s\S*\s(?:Object.*values: (.*))?/g;
+const regexReturns = /@return(?:s)?\s*{(\w+)}/;
 const regexVersion = /@version\s*([0-9.]+)/g;
 const regex_glMatrix = /^glMatrix\.(\w+)\s*=\s*(.*);$/gm;
 function parseKlass(klass, regex, src, callback) {
@@ -223,7 +226,8 @@ function parseKlass(klass, regex, src, callback) {
         let returnType = convertType(klass, klass, method);
         let resultJavadocParams;
         while ((resultJavadocParams = regexParams.exec(javadoc)) !== null) {
-            javadocParams.push(resultJavadocParams[1]);
+            let objAttrs = resultJavadocParams[2];
+            javadocParams.push(!objAttrs ? resultJavadocParams[1] : "{" + objAttrs.split(/\s*,\s*/).map(attr => attr + ": number").join(", ") + "}");
         }
         const isAlias = !!targetKlass;
         if (!isAlias) {
@@ -245,15 +249,15 @@ function parseKlass(klass, regex, src, callback) {
             }
         }
         callback({
-            klass,
-            javadoc,
-            method,
-            isAlias,
-            targetKlass,
-            targetMethod,
-            params,
-            paramTypes,
-            returnType
+            klass: klass,
+            javadoc: javadoc,
+            method: method,
+            isAlias: isAlias,
+            targetKlass: targetKlass,
+            targetMethod: targetMethod,
+            params: params,
+            paramTypes: paramTypes,
+            returnType: returnType
         });
     }
 }
@@ -334,15 +338,15 @@ for (const klass of klasses) {
         const paramTypes = signature.paramTypes;
         const returnType = signature.returnType;
         methodMap.set(signature.method, {
-            klass,
-            javadoc,
-            method,
-            isAlias,
-            targetKlass,
-            targetMethod,
-            params,
-            paramTypes,
-            returnType
+            klass: klass,
+            javadoc: javadoc,
+            method: method,
+            isAlias: isAlias,
+            targetKlass: targetKlass,
+            targetMethod: targetMethod,
+            params: params,
+            paramTypes: paramTypes,
+            returnType: returnType
         });
     });
     signatureDB.set(klass, methodMap);

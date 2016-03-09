@@ -1,10 +1,10 @@
 /**
  * @fileoverview gl-matrix.d.ts generator
  * @author chuntaro <chuntaro@sakura-games.jp>
- * @version 1.0.0
+ * @version 1.1.0
  */
 
-// Copyright (c) 2015 chuntaro
+// Copyright (c) 2015, 2016  chuntaro
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -31,10 +31,10 @@
 // /foo/bar/gl-matrix.d.ts/generator
 //
 // $ node -v
-// v4.2.3
+// v4.3.2
 //
 // $ tsc -v
-// message TS6029: Version 1.7.5
+// Version 1.8.2
 //
 // $ git clone https://github.com/toji/gl-matrix.git
 //
@@ -99,7 +99,7 @@ function debug(obj: string | (() => void) | boolean, message?: string): void {
 const glMatrixDir = "gl-matrix/src/gl-matrix/";
 const klasses = ["vec2", "vec3", "vec4", "mat2", "mat2d", "mat3", "mat4", "quat"];
 
-const javadocTypes = ["number", "Number", "String", "quat4", "Function", "Object", "Array", "Type"];
+const javadocTypes = ["number", "Number", "String", "quat4", "Function", "Object", "Array", "Type", "Boolean"];
 const validTypes = klasses.concat(javadocTypes);
 
 function convertType(fromType: string, klass?: string, method?: string): string {
@@ -134,6 +134,8 @@ function convertType(fromType: string, klass?: string, method?: string): string 
       toType = fromType.toLowerCase();
       break;
     }
+  } else if (fromType[0] === "{" && fromType[fromType.length - 1] === "}") {
+    toType = fromType;
   }
   if (!STRICTLY_TYPED && klasses.indexOf(toType) >= 0) {
     toType = ARRAY_TYPE;
@@ -247,8 +249,8 @@ const reFirst = String.raw`(/\*\*${reDocTerm}\*/)${reDocTerm}`;
 const reLast = String.raw`${reMethod}\s*=\s*${reFunc}\s*${reParams}\s*(?:\{[\s\S]*?(?:(return)|\}))?`;
 const regexMethod = new RegExp(reFirst + "(?:" + reKlasses + ")" + reLast, "g");
 
-const regexParams = /@(?:param|returns)\s*{(\w+)}\s*/g;
-const regexReturns = /@returns\s*{(\w+)}/;
+const regexParams = /@(?:param|returns)\s*{(\w+)}\s\S*\s(?:Object.*values: (.*))?/g;
+const regexReturns = /@return(?:s)?\s*{(\w+)}/;
 
 const regexVersion = /@version\s*([0-9.]+)/g;
 const regex_glMatrix = /^glMatrix\.(\w+)\s*=\s*(.*);$/gm;
@@ -274,7 +276,8 @@ function parseKlass(klass: string, regex: RegExp, src: string, callback: (signat
 
     let resultJavadocParams: RegExpExecArray;
     while ((resultJavadocParams = regexParams.exec(javadoc)) !== null) {
-      javadocParams.push(resultJavadocParams[1]);
+      let objAttrs = resultJavadocParams[2];
+      javadocParams.push(!objAttrs ? resultJavadocParams[1] : "{" + objAttrs.split(/\s*,\s*/).map(attr => attr + ": number").join(", ") + "}");
     }
 
     const isAlias = !!targetKlass;
