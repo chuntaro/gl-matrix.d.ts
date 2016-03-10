@@ -2638,44 +2638,48 @@ export interface quat extends Float32Array {
   setAxes(out: vec3, view: vec3, right: vec3, up: quat): quat;
 
   /**
-   * Creates a new vec4 initialized with values from an existing vector
+   * Creates a new quat initialized with values from an existing quaternion
    *
-   * @param {vec4} a vector to clone
-   * @returns {vec4} a new 4D vector
+   * @param {quat} a quaternion to clone
+   * @returns {quat} a new quaternion
+   * @function
    */
-  clone(a: vec4): vec4;
+  clone(a: quat): quat;
 
   /**
-   * Creates a new vec4 initialized with the given values
+   * Creates a new quat initialized with the given values
    *
    * @param {Number} x X component
    * @param {Number} y Y component
    * @param {Number} z Z component
    * @param {Number} w W component
-   * @returns {vec4} a new 4D vector
+   * @returns {quat} a new quaternion
+   * @function
    */
-  fromValues(x: number, y: number, z: number, w: number): vec4;
+  fromValues(x: number, y: number, z: number, w: number): quat;
 
   /**
-   * Copy the values from one vec4 to another
+   * Copy the values from one quat to another
    *
-   * @param {vec4} out the receiving vector
-   * @param {vec4} a the source vector
-   * @returns {vec4} out
+   * @param {quat} out the receiving quaternion
+   * @param {quat} a the source quaternion
+   * @returns {quat} out
+   * @function
    */
-  copy(out: vec4, a: vec4): vec4;
+  copy(out: quat, a: quat): quat;
 
   /**
-   * Set the components of a vec4 to the given values
+   * Set the components of a quat to the given values
    *
-   * @param {vec4} out the receiving vector
+   * @param {quat} out the receiving quaternion
    * @param {Number} x X component
    * @param {Number} y Y component
    * @param {Number} z Z component
    * @param {Number} w W component
-   * @returns {vec4} out
+   * @returns {quat} out
+   * @function
    */
-  // set(out: vec4, x: number, y: number, z: number, w: number): vec4; // not Float32Array compatible
+  // set(out: quat, x: number, y: number, z: number, w: number): quat; // not Float32Array compatible
 
   /**
    * Set a quat to the identity quaternion
@@ -2712,14 +2716,15 @@ export interface quat extends Float32Array {
   getAxisAngle(out_axis: vec3, q: quat): number;
 
   /**
-   * Adds two vec4's
+   * Adds two quat's
    *
-   * @param {vec4} out the receiving vector
-   * @param {vec4} a the first operand
-   * @param {vec4} b the second operand
-   * @returns {vec4} out
+   * @param {quat} out the receiving quaternion
+   * @param {quat} a the first operand
+   * @param {quat} b the second operand
+   * @returns {quat} out
+   * @function
    */
-  add(out: vec4, a: vec4, b: vec4): vec4;
+  add(out: quat, a: quat, b: quat): quat;
 
   /**
    * Multiplies two quat's
@@ -2742,14 +2747,15 @@ export interface quat extends Float32Array {
   mul(out: quat, a: quat, b: quat): quat;
 
   /**
-   * Scales a vec4 by a scalar number
+   * Scales a quat by a scalar number
    *
-   * @param {vec4} out the receiving vector
-   * @param {vec4} a the vector to scale
+   * @param {quat} out the receiving vector
+   * @param {quat} a the vector to scale
    * @param {Number} b amount to scale the vector by
-   * @returns {vec4} out
+   * @returns {quat} out
+   * @function
    */
-  scale(out: vec4, a: vec4, b: number): vec4;
+  scale(out: quat, a: quat, b: number): quat;
 
   /**
    * Rotates a quaternion by the given angle about the X axis
@@ -2793,24 +2799,26 @@ export interface quat extends Float32Array {
   calculateW(out: quat, a: quat): quat;
 
   /**
-   * Calculates the dot product of two vec4's
+   * Calculates the dot product of two quat's
    *
-   * @param {vec4} a the first operand
-   * @param {vec4} b the second operand
+   * @param {quat} a the first operand
+   * @param {quat} b the second operand
    * @returns {Number} dot product of a and b
+   * @function
    */
-  dot(a: vec4, b: vec4): number;
+  dot(a: quat, b: quat): number;
 
   /**
-   * Performs a linear interpolation between two vec4's
+   * Performs a linear interpolation between two quat's
    *
-   * @param {vec4} out the receiving vector
-   * @param {vec4} a the first operand
-   * @param {vec4} b the second operand
+   * @param {quat} out the receiving quaternion
+   * @param {quat} a the first operand
+   * @param {quat} b the second operand
    * @param {Number} t interpolation amount between the two inputs
-   * @returns {vec4} out
+   * @returns {quat} out
+   * @function
    */
-  lerp(out: vec4, a: vec4, b: vec4, t: number): vec4;
+  lerp(out: quat, a: quat, b: quat, t: number): quat;
 
   /**
    * Performs a spherical linear interpolation between two quat
@@ -2856,12 +2864,13 @@ export interface quat extends Float32Array {
   conjugate(out: quat, a: quat): quat;
 
   /**
-   * Calculates the length of a vec4
+   * Calculates the length of a quat
    *
-   * @param {vec4} a vector to calculate length of
+   * @param {quat} a vector to calculate length of
    * @returns {Number} length of a
+   * @function
    */
-  // length(a: vec4): number; // not Float32Array compatible
+  // length(a: quat): number; // not Float32Array compatible
 
   /**
    * Calculates the length of a quat
@@ -2870,15 +2879,7 @@ export interface quat extends Float32Array {
    * @returns {Number} length of a
    * @function
    */
-  len(a: vec4): number;
-
-  /**
-   * Calculates the squared length of a vec4
-   *
-   * @param {vec4} a vector to calculate squared length of
-   * @returns {Number} squared length of a
-   */
-  squaredLength(a: vec4): number;
+  len(a: quat): number;
 
   /**
    * Calculates the squared length of a quat
@@ -2887,16 +2888,26 @@ export interface quat extends Float32Array {
    * @returns {Number} squared length of a
    * @function
    */
-  sqrLen(a: vec4): number;
+  squaredLength(a: quat): number;
 
   /**
-   * Normalize a vec4
+   * Calculates the squared length of a quat
    *
-   * @param {vec4} out the receiving vector
-   * @param {vec4} a vector to normalize
-   * @returns {vec4} out
+   * @param {quat} a vector to calculate squared length of
+   * @returns {Number} squared length of a
+   * @function
    */
-  normalize(out: vec4, a: vec4): vec4;
+  sqrLen(a: quat): number;
+
+  /**
+   * Normalize a quat
+   *
+   * @param {quat} out the receiving quaternion
+   * @param {quat} a quaternion to normalize
+   * @returns {quat} out
+   * @function
+   */
+  normalize(out: quat, a: quat): quat;
 
   /**
    * Creates a quaternion from the given 3x3 rotation matrix.
@@ -2920,22 +2931,22 @@ export interface quat extends Float32Array {
   str(a: quat): string;
 
   /**
-   * Returns whether or not the vectors have exactly the same elements in the same position (when compared with ===)
+   * Returns whether or not the quaternions have exactly the same elements in the same position (when compared with ===)
    *
-   * @param {vec4} a The first vector.
-   * @param {vec4} b The second vector.
+   * @param {quat} a The first quaternion.
+   * @param {quat} b The second quaternion.
    * @returns {Boolean} True if the vectors are equal, false otherwise.
    */
-  exactEquals(a: vec4, b: vec4): boolean;
+  exactEquals(a: quat, b: quat): boolean;
 
   /**
-   * Returns whether or not the vectors have approximately the same elements in the same position.
+   * Returns whether or not the quaternions have approximately the same elements in the same position.
    *
-   * @param {vec4} a The first vector.
-   * @param {vec4} b The second vector.
+   * @param {quat} a The first vector.
+   * @param {quat} b The second vector.
    * @returns {Boolean} True if the vectors are equal, false otherwise.
    */
-  equals(a: vec4, b: vec4): boolean;
+  equals(a: quat, b: quat): boolean;
 }
 export declare var quat: quat;
 

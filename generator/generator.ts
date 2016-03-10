@@ -183,7 +183,7 @@ function ToString(signature: Signature): string {
   }
 
   const isAlias = signature.isAlias;
-  if (isAlias) {
+  if (isAlias && signature.klass === signature.targetKlass) {
     const targetKlass = signature.targetKlass;
     const targetMethod = signature.targetMethod;
 
@@ -281,8 +281,10 @@ function parseKlass(klass: string, regex: RegExp, src: string, callback: (signat
     }
 
     const isAlias = !!targetKlass;
-    if (!isAlias) {
-      String(paramStr).trim().split(",").forEach((str, i) => {
+    if (!isAlias || klass !== targetKlass) {
+      const arrayParams = !isAlias ? String(paramStr).trim().split(",") : signatureDB.get(targetKlass).get(targetMethod).params;
+
+      arrayParams.forEach((str, i) => {
         const param = str.trim();
         if (!param) {
           return;

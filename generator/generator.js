@@ -146,7 +146,7 @@ function ToString(signature) {
         }
     }
     const isAlias = signature.isAlias;
-    if (isAlias) {
+    if (isAlias && signature.klass === signature.targetKlass) {
         const targetKlass = signature.targetKlass;
         const targetMethod = signature.targetMethod;
         const targetSig = signatureDB.get(targetKlass).get(targetMethod);
@@ -230,8 +230,9 @@ function parseKlass(klass, regex, src, callback) {
             javadocParams.push(!objAttrs ? resultJavadocParams[1] : "{" + objAttrs.split(/\s*,\s*/).map(attr => attr + ": number").join(", ") + "}");
         }
         const isAlias = !!targetKlass;
-        if (!isAlias) {
-            String(paramStr).trim().split(",").forEach((str, i) => {
+        if (!isAlias || klass !== targetKlass) {
+            const arrayParams = !isAlias ? String(paramStr).trim().split(",") : signatureDB.get(targetKlass).get(targetMethod).params;
+            arrayParams.forEach((str, i) => {
                 const param = str.trim();
                 if (!param) {
                     return;

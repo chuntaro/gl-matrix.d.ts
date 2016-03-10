@@ -2638,42 +2638,46 @@ interface quat {
   setAxes(out: Float32Array, view: Float32Array, right: Float32Array, up: Float32Array): Float32Array;
 
   /**
-   * Creates a new vec4 initialized with values from an existing vector
+   * Creates a new quat initialized with values from an existing quaternion
    *
-   * @param {vec4} a vector to clone
-   * @returns {vec4} a new 4D vector
+   * @param {quat} a quaternion to clone
+   * @returns {quat} a new quaternion
+   * @function
    */
   clone(a: Float32Array): Float32Array;
 
   /**
-   * Creates a new vec4 initialized with the given values
+   * Creates a new quat initialized with the given values
    *
    * @param {Number} x X component
    * @param {Number} y Y component
    * @param {Number} z Z component
    * @param {Number} w W component
-   * @returns {vec4} a new 4D vector
+   * @returns {quat} a new quaternion
+   * @function
    */
   fromValues(x: number, y: number, z: number, w: number): Float32Array;
 
   /**
-   * Copy the values from one vec4 to another
+   * Copy the values from one quat to another
    *
-   * @param {vec4} out the receiving vector
-   * @param {vec4} a the source vector
-   * @returns {vec4} out
+   * @param {quat} out the receiving quaternion
+   * @param {quat} a the source quaternion
+   * @returns {quat} out
+   * @function
    */
   copy(out: Float32Array, a: Float32Array): Float32Array;
 
   /**
-   * Set the components of a vec4 to the given values
+   * Set the components of a quat to the given values
    *
-   * @param {vec4} out the receiving vector
+   * @param {quat} out the receiving quaternion
    * @param {Number} x X component
    * @param {Number} y Y component
    * @param {Number} z Z component
    * @param {Number} w W component
-   * @returns {vec4} out
+   * @returns {quat} out
+   * @function
    */
   set(out: Float32Array, x: number, y: number, z: number, w: number): Float32Array;
 
@@ -2712,12 +2716,13 @@ interface quat {
   getAxisAngle(out_axis: Float32Array, q: Float32Array): number;
 
   /**
-   * Adds two vec4's
+   * Adds two quat's
    *
-   * @param {vec4} out the receiving vector
-   * @param {vec4} a the first operand
-   * @param {vec4} b the second operand
-   * @returns {vec4} out
+   * @param {quat} out the receiving quaternion
+   * @param {quat} a the first operand
+   * @param {quat} b the second operand
+   * @returns {quat} out
+   * @function
    */
   add(out: Float32Array, a: Float32Array, b: Float32Array): Float32Array;
 
@@ -2742,12 +2747,13 @@ interface quat {
   mul(out: Float32Array, a: Float32Array, b: Float32Array): Float32Array;
 
   /**
-   * Scales a vec4 by a scalar number
+   * Scales a quat by a scalar number
    *
-   * @param {vec4} out the receiving vector
-   * @param {vec4} a the vector to scale
+   * @param {quat} out the receiving vector
+   * @param {quat} a the vector to scale
    * @param {Number} b amount to scale the vector by
-   * @returns {vec4} out
+   * @returns {quat} out
+   * @function
    */
   scale(out: Float32Array, a: Float32Array, b: number): Float32Array;
 
@@ -2793,22 +2799,24 @@ interface quat {
   calculateW(out: Float32Array, a: Float32Array): Float32Array;
 
   /**
-   * Calculates the dot product of two vec4's
+   * Calculates the dot product of two quat's
    *
-   * @param {vec4} a the first operand
-   * @param {vec4} b the second operand
+   * @param {quat} a the first operand
+   * @param {quat} b the second operand
    * @returns {Number} dot product of a and b
+   * @function
    */
   dot(a: Float32Array, b: Float32Array): number;
 
   /**
-   * Performs a linear interpolation between two vec4's
+   * Performs a linear interpolation between two quat's
    *
-   * @param {vec4} out the receiving vector
-   * @param {vec4} a the first operand
-   * @param {vec4} b the second operand
+   * @param {quat} out the receiving quaternion
+   * @param {quat} a the first operand
+   * @param {quat} b the second operand
    * @param {Number} t interpolation amount between the two inputs
-   * @returns {vec4} out
+   * @returns {quat} out
+   * @function
    */
   lerp(out: Float32Array, a: Float32Array, b: Float32Array, t: number): Float32Array;
 
@@ -2856,10 +2864,11 @@ interface quat {
   conjugate(out: Float32Array, a: Float32Array): Float32Array;
 
   /**
-   * Calculates the length of a vec4
+   * Calculates the length of a quat
    *
-   * @param {vec4} a vector to calculate length of
+   * @param {quat} a vector to calculate length of
    * @returns {Number} length of a
+   * @function
    */
   length(a: Float32Array): number;
 
@@ -2873,10 +2882,11 @@ interface quat {
   len(a: Float32Array): number;
 
   /**
-   * Calculates the squared length of a vec4
+   * Calculates the squared length of a quat
    *
-   * @param {vec4} a vector to calculate squared length of
+   * @param {quat} a vector to calculate squared length of
    * @returns {Number} squared length of a
+   * @function
    */
   squaredLength(a: Float32Array): number;
 
@@ -2890,11 +2900,12 @@ interface quat {
   sqrLen(a: Float32Array): number;
 
   /**
-   * Normalize a vec4
+   * Normalize a quat
    *
-   * @param {vec4} out the receiving vector
-   * @param {vec4} a vector to normalize
-   * @returns {vec4} out
+   * @param {quat} out the receiving quaternion
+   * @param {quat} a quaternion to normalize
+   * @returns {quat} out
+   * @function
    */
   normalize(out: Float32Array, a: Float32Array): Float32Array;
 
@@ -2920,19 +2931,19 @@ interface quat {
   str(a: Float32Array): string;
 
   /**
-   * Returns whether or not the vectors have exactly the same elements in the same position (when compared with ===)
+   * Returns whether or not the quaternions have exactly the same elements in the same position (when compared with ===)
    *
-   * @param {vec4} a The first vector.
-   * @param {vec4} b The second vector.
+   * @param {quat} a The first quaternion.
+   * @param {quat} b The second quaternion.
    * @returns {Boolean} True if the vectors are equal, false otherwise.
    */
   exactEquals(a: Float32Array, b: Float32Array): boolean;
 
   /**
-   * Returns whether or not the vectors have approximately the same elements in the same position.
+   * Returns whether or not the quaternions have approximately the same elements in the same position.
    *
-   * @param {vec4} a The first vector.
-   * @param {vec4} b The second vector.
+   * @param {quat} a The first vector.
+   * @param {quat} b The second vector.
    * @returns {Boolean} True if the vectors are equal, false otherwise.
    */
   equals(a: Float32Array, b: Float32Array): boolean;
