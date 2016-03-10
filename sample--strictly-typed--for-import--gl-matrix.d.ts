@@ -4,6 +4,10 @@
 // Definitions: https://github.com/chuntaro/gl-matrix.d.ts
 
 
+/**
+ * @class Common utilities
+ * @name glMatrix
+ */
 export interface glMatrix {
   EPSILON: number;
   ARRAY_TYPE: Float32Array | Array<number>;
@@ -40,6 +44,10 @@ export interface glMatrix {
 export declare var glMatrix: glMatrix;
 
 
+/**
+ * @class 2 Dimensional Vector
+ * @name vec2
+ */
 export interface vec2 extends Float32Array {
   /**
    * Creates a new, empty vec2
@@ -443,6 +451,10 @@ export interface vec2 extends Float32Array {
 export declare var vec2: vec2;
 
 
+/**
+ * @class 3 Dimensional Vector
+ * @name vec3
+ */
 export interface vec3 extends Float32Array {
   /**
    * Creates a new, empty vec3
@@ -899,6 +911,10 @@ export interface vec3 extends Float32Array {
 export declare var vec3: vec3;
 
 
+/**
+ * @class 4 Dimensional Vector
+ * @name vec4
+ */
 export interface vec4 extends Float32Array {
   /**
    * Creates a new, empty vec4
@@ -1272,6 +1288,10 @@ export interface vec4 extends Float32Array {
 export declare var vec4: vec4;
 
 
+/**
+ * @class 2x2 Matrix
+ * @name mat2
+ */
 export interface mat2 extends Float32Array {
   /**
    * Creates a new identity mat2
@@ -1526,6 +1546,24 @@ export interface mat2 extends Float32Array {
 export declare var mat2: mat2;
 
 
+/**
+ * @class 2x3 Matrix
+ * @name mat2d
+ * 
+ * @description 
+ * A mat2d contains six elements defined as:
+ * <pre>
+ * [a, c, tx,
+ *  b, d, ty]
+ * </pre>
+ * This is a short form for the 3x3 matrix:
+ * <pre>
+ * [a, c, tx,
+ *  b, d, ty,
+ *  0, 0, 1]
+ * </pre>
+ * The last row is ignored so the array is shorter and operations are faster.
+ */
 export interface mat2d extends Float32Array {
   /**
    * Creates a new identity mat2d
@@ -1780,6 +1818,10 @@ export interface mat2d extends Float32Array {
 export declare var mat2d: mat2d;
 
 
+/**
+ * @class 3x3 Matrix
+ * @name mat3
+ */
 export interface mat3 extends Float32Array {
   /**
    * Creates a new identity mat3
@@ -2087,6 +2129,10 @@ export interface mat3 extends Float32Array {
 export declare var mat3: mat3;
 
 
+/**
+ * @class 4x4 Matrix
+ * @name mat4
+ */
 export interface mat4 extends Float32Array {
   /**
    * Creates a new identity mat4
@@ -2604,6 +2650,10 @@ export interface mat4 extends Float32Array {
 export declare var mat4: mat4;
 
 
+/**
+ * @class Quaternion
+ * @name quat
+ */
 export interface quat extends Float32Array {
   /**
    * Creates a new identity quat

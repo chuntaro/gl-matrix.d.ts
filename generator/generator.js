@@ -132,6 +132,7 @@ function convertType(fromType, klass, method) {
     return toType;
 }
 let signatureDB = new Map();
+let headerDocs = new Map();
 function ToString(signature) {
     let str = "";
     const method = signature.method;
@@ -284,6 +285,13 @@ let header = "";
 let glMatrix = "";
 {
     const common_js = fs.readFileSync(glMatrixDir + "common.js", "utf-8");
+    if (ENABLE_JAVADOC) {
+        const regexHeader = new RegExp(`${reFirst}var glMatrix = {`);
+        const resultHeader = regexHeader.exec(common_js);
+        if (resultHeader) {
+            glMatrix += `${resultHeader[1]}\n`;
+        }
+    }
     glMatrix += `${INTERFACE_DECL} glMatrix {\n`;
     let result;
     while ((result = regex_glMatrix.exec(common_js)) !== null) {
@@ -327,6 +335,11 @@ let glMatrix = "";
 //
 for (const klass of klasses) {
     const src = fs.readFileSync(glMatrixDir + klass + ".js", "utf-8");
+    const regexHeader = new RegExp(`${reFirst}var ${klass} = {`);
+    const resultHeader = regexHeader.exec(src);
+    if (resultHeader) {
+        headerDocs.set(klass, `${resultHeader[1]}\n`);
+    }
     // let methodMap = new MethodMap(); // compile error ???
     let methodMap = new Map();
     parseKlass(klass, regexMethod, src, signature => {
@@ -360,11 +373,15 @@ let output = "";
 // for (const [klass, methodMap] of signatureDB) {
 for (const klass of signatureDB.keys()) {
     const methodMap = signatureDB.get(klass);
+    output += "\n\n";
+    if (ENABLE_JAVADOC) {
+        output += headerDocs.get(klass);
+    }
     if (STRICTLY_TYPED) {
-        output += `\n\n${INTERFACE_DECL} ${klass} extends ${ARRAY_TYPE} {`;
+        output += `${INTERFACE_DECL} ${klass} extends ${ARRAY_TYPE} {`;
     }
     else {
-        output += `\n\n${INTERFACE_DECL} ${klass} {`;
+        output += `${INTERFACE_DECL} ${klass} {`;
     }
     if (!ENABLE_JAVADOC) {
         output += "\n";
